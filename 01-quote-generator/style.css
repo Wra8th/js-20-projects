@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,600;1,400;1,700&display=swap');
 
+* { box-sizing: border-box; }
+
 html {
   box-sizing: border-box;
+  font-size: 12px;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
 }
 
 body {
@@ -16,5 +25,39 @@ body {
   justify-content: center;
   margin: 0;
   min-height: 100vh;
+  padding: 0 10px;
   text-align: center;
 }
+
+.quote-container {
+  /* background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.2); */
+  max-width: 768px;
+  /* padding: 24px 32px; */
+  width: auto;
+}
+
+.quote-text {
+  font-size: 2.75rem;
+}
+
+.long-quote {
+  font-size: 2rem;
+}
+
+.fa-quote-left {
+  font-size: 4rem;
+}
+
+.quote-author {
+  font-size: 1.4rem;
+  font-style: italic;
+  font-weight: 400;
+  margin-top: 15px;
+}
+.quote-author::before,
+.quote-author::after {
+  content: "-";
+}
+
