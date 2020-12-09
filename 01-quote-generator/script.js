@@ -4,25 +4,26 @@ const authorText = document.getElementById('author')
 const twitterButton = document.getElementById('twitter')
 const newQuoteBtn = document.getElementById('new-quote')
 const loader = document.getElementById('loader')
+const errorMessage = document.getElementById('error-message')
 
-// Show Loading
-function loading() {
+function showLoadingSpinner() {
   loader.hidden = false
   quoteContainer.hidden = true
 }
 
-// Hide Loading
-function complete() {
+function removeLoadingSpinner() {
   if (!loader.hidden) {
     loader.hidden = true
     quoteContainer.hidden = false
   }
 }
 
-// Get Quote from API
-async function getQuote() {
-  loading()
+let countCallsToAPI = 0;
+
+async function getQuoteFromAPI() {
+  showLoadingSpinner()
   const proxyUrl = 'https://guarded-peak-77488.herokuapp.com/'
+  // const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
   const apiUrl = 'http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=json'
   try {
     const response = await fetch(proxyUrl + apiUrl)
@@ -43,10 +44,16 @@ async function getQuote() {
     }
     quoteText.innerText = data.quoteText
     // Stop Loader & Show Quote
-    complete()
+    removeLoadingSpinner()
+
   } catch (error) {
-    getQuote()
-    console.log('Woops, no quote!', error)
+    countCallsToAPI += 1
+    if (countCallsToAPI <= 10) {
+      getQuoteFromAPI()
+      console.log('Woops, no quote!', error)
+    } else if (countCallsToAPI > 10) {
+      errorMessage.classList.add('visible')
+    }
   }
 }
 
@@ -60,8 +67,8 @@ function tweetQuote() {
 }
 
 // Event Listeners
-newQuoteBtn.addEventListener('click', getQuote)
+newQuoteBtn.addEventListener('click', getQuoteFromAPI)
 twitterButton.addEventListener('click', tweetQuote)
 
 // On Load
-getQuote();
+getQuoteFromAPI();

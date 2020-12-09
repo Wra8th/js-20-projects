@@ -163,6 +163,15 @@ body {
   animation: spinLoader 2s linear infinite;
 }
 
+.error-message {
+  position: fixed;
+  top: 24px;
+  display: none;
+}
+.error-message.visible {
+  display: block;
+}
+
 /* Keyframes */
 
 @keyframes moveGradient {
