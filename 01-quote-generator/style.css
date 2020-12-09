@@ -153,10 +153,25 @@ body {
   max-width: 360px;
 }
 
+/* Loader */
+.loader {
+  border: 10px solid #f3f3f3;
+  border-top: 10px solid #f4ef67;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spinLoader 2s linear infinite;
+}
+
 /* Keyframes */
 
 @keyframes moveGradient {
   50% {
     background-position: 100% 50%;
   }
+}
+
+@keyframes spinLoader {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
